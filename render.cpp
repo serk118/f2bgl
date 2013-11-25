@@ -4,7 +4,11 @@
  */
 
 #ifdef USE_GLES
+ #ifdef __AROS__
+  #include <GL/gl.h>
+ #else
 #include <GLES/gl.h>
+#endif
 #else
 #include <SDL_opengl.h>
 #endif
@@ -52,8 +56,10 @@ struct Matrix4f {
 
 #ifdef USE_GLES
 
+#ifndef __AROS__
 #define glOrtho glOrthof
 #define glFrustum glFrustumf
+#endif
 
 static const int kVerticesBufferSize = 1024;
 static GLfloat _verticesBuffer[kVerticesBufferSize * 3];
